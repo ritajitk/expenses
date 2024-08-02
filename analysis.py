@@ -51,13 +51,9 @@ def generate_report(df, start_date=None, end_date=None, year=None, month=None):
     print(f"Expense from Savings account: {exp_savings}")
 
     nrows,ncols = df_filtered.shape
-    obj1 = df_filtered['Remark'].fillna('');
     obj2 = df_filtered['Date'].dt.strftime('%Y-%m-%d')
 
     for i in range(nrows):
-        # Fill NaN remarks with empty strings
-        df_filtered.loc[i, 'Remark'] = obj1[i]
-
         # Convert 'Date' column to string format for display
         df_filtered.loc[i, 'Date'] = obj2[i]
 
@@ -89,13 +85,10 @@ def generate_report(df, start_date=None, end_date=None, year=None, month=None):
         f.write(table_fig.to_html(full_html=False, include_plotlyjs='cdn'))
         f.write(expense_fig.to_html(full_html=False, include_plotlyjs='cdn'))
 
-# Log transactions with a remark column
-def log_transaction(file, date, description, category, amount, t_type, account, remark=''):
-    if remark is None:
-        remark = ''
+def log_transaction(file, date, description, category, amount, t_type, account):
     with open(file, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow([date, description, category, amount, t_type, account, remark])
+        writer.writerow([date, description, category, amount, t_type, account])
 
 # Example usage
 df = load_data('expenses.csv')
