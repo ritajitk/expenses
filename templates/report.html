@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container report-section">
+        <h1>Financial Report</h1>
+        <p>Total Income: {{ total_income }}</p>
+        <p>Total Expense: {{ total_expense }}</p>
+        <p>Balance: {{ balance }}</p>
+        <p>Expense from Credit Card: {{ exp_credit_card }}</p>
+        <p>Expense from Savings account: {{ exp_savings }}</p>
+        <div>{{ plot_html|safe }}</div>
+    </div>
+</body>
+</html>
